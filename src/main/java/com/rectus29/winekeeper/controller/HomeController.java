@@ -1,7 +1,6 @@
 package com.rectus29.winekeeper.controller;
 
 import com.rectus29.winekeeper.model.Bottle;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

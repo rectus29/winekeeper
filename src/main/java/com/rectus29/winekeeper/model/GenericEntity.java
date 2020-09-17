@@ -1,18 +1,17 @@
 package com.rectus29.winekeeper.model;
 
+import com.rectus29.winekeeper.enums.State;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class DomainGenericEntity<T> {
+public abstract class GenericEntity<T> {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Version
     @Type(type = "dbtimestamp")
@@ -21,6 +20,8 @@ public abstract class DomainGenericEntity<T> {
     private Date created = new Date();
     @Column(nullable = false, columnDefinition = "varchar(128)")
     private String uniqueId = UUID.randomUUID().toString();
+    @Column
+    private State state = State.ENABLE;
 
 
     public Long getId() {
@@ -50,5 +51,21 @@ public abstract class DomainGenericEntity<T> {
         return (T) this;
     }
 
+    public String getUniqueId() {
+        return uniqueId;
+    }
 
+    public T setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
+        return (T) this;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public T setState(State state) {
+        this.state = state;
+        return (T) this;
+    }
 }
