@@ -18,11 +18,10 @@ public abstract class GenericEntity<T> {
     private Date updated;
     @Column
     private Date created = new Date();
-    @Column(nullable = false, columnDefinition = "varchar(128)")
-    private String uniqueId = UUID.randomUUID().toString();
+    @Column(nullable = false)
+    private UUID uniqueId = UUID.randomUUID();
     @Column
     private State state = State.ENABLE;
-
 
     public Long getId() {
         return id;
@@ -37,27 +36,12 @@ public abstract class GenericEntity<T> {
         return updated;
     }
 
-    public T setUpdated(Date updated) {
-        this.updated = updated;
-        return (T) this;
-    }
-
     public Date getCreated() {
         return created;
     }
 
-    public T setCreated(Date created) {
-        this.created = created;
-        return (T) this;
-    }
-
-    public String getUniqueId() {
+    public UUID getUniqueId() {
         return uniqueId;
-    }
-
-    public T setUniqueId(String uniqueId) {
-        this.uniqueId = uniqueId;
-        return (T) this;
     }
 
     public State getState() {
